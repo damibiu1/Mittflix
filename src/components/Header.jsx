@@ -13,6 +13,9 @@ export class Header extends Component {
         fetch(url)
             .then((res) => res.json())
             .then((data) => {
+                data.results.forEach(function (movie) {
+                    movie.liked = false;
+                  });
                 this.setState({ movies: data.results });
             });
         this.setState({ ...this, search: "" })
@@ -38,7 +41,7 @@ export class Header extends Component {
                     </form>
                 </header>
                 {
-                    this.state.movies.length && <div className="titleList">
+                    this.state.movies && this.state.movies.length && <div className="titleList">
                         <Movie movies={this.state.movies} />
                     </div>
                 }
